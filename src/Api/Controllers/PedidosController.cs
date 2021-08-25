@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Interfaces.Notification;
+using Domain.Interfaces.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,14 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PedidosController : ControllerBase
+    public class PedidosController : MainController
     {
+        private readonly IPedidoService _pedidoService;
+
+        public PedidosController(INotificador notificador,
+            IPedidoService pedidoService) : base(notificador)
+        {
+            _pedidoService = pedidoService;
+        }
     }
 }
