@@ -20,5 +20,10 @@ namespace Api.Controllers
         {
             _pedidoService = pedidoService;
         }
+
+        public async Task<IActionResult> Post()
+        {
+            return CustomResponse();
+        }
     }
 }

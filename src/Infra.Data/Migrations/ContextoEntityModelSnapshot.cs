@@ -58,7 +58,7 @@ namespace Infra.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<double>("Desconto")
-                        .HasColumnType("double");
+                        .HasColumnType("float");
 
                     b.Property<int>("Numero")
                         .ValueGeneratedOnAdd()
@@ -66,10 +66,10 @@ namespace Infra.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
 
@@ -96,7 +96,7 @@ namespace Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
 

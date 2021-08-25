@@ -29,9 +29,9 @@ namespace Infra.Data.Migrations
                     Numero = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(100,2)", nullable: false),
-                    Desconto = table.Column<double>(type: "double", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(100,2)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal", nullable: false),
+                    Desconto = table.Column<double>(type: "float", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal", nullable: false),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -51,7 +51,7 @@ namespace Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(100,2)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal", nullable: false),
                     Foto = table.Column<string>(type: "varchar(100)", nullable: false),
                     PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
