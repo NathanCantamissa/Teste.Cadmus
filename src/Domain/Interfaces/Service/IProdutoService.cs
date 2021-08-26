@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Infra.CrossCutting.Dto;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,6 @@ namespace Domain.Interfaces.Service
 {
     public interface IProdutoService
     {
+        Task Cadastrar(CadastroProdutoDto dados, IFormFile foto);
     }
 }

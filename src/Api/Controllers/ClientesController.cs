@@ -25,7 +25,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CadastroClienteDto dados)
         {
-            _clienteService.Cadastrar(dados);
+            await _clienteService.Cadastrar(dados);
             return CustomResponse();
         }
     }

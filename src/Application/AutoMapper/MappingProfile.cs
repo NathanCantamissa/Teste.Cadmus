@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Models;
 using Infra.CrossCutting.Dto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Application.AutoMapper
         public MappingProfile()
         {
             CreateMap<Cliente, CadastroClienteDto>().ReverseMap();
+            CreateMap<Produto, CadastroProdutoDto>().ReverseMap();
+            CreateMap<Pedido, CadastroPedidoDto>().ReverseMap();
         }
     }
 }

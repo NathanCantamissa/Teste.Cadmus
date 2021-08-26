@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.Notification;
 using Domain.Interfaces.Service;
+using Infra.CrossCutting.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,8 +23,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post([FromBody] CadastroPedidoDto dados)
         {
+            await _pedidoService.Cadastrar(dados);
             return CustomResponse();
         }
     }

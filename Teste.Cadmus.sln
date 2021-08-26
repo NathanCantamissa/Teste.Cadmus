@@ -15,17 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{A840BEC8-60C0-4960-9002-EDF1C45C80C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "src\Api\Api.csproj", "{50A1A5D5-740B-4332-95C5-A1109048572D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj", "{50A1A5D5-740B-4332-95C5-A1109048572D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{290161EB-28E1-4F67-97E5-7F22301A45A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{290161EB-28E1-4F67-97E5-7F22301A45A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{CBDCF4F6-6DCA-4602-9762-8CCB2846774D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{CBDCF4F6-6DCA-4602-9762-8CCB2846774D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Data", "src\Infra.Data\Infra.Data.csproj", "{8739AE09-C44D-40EB-BB5F-AFE930A10CBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data", "src\Infra.Data\Infra.Data.csproj", "{8739AE09-C44D-40EB-BB5F-AFE930A10CBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.CrossCutting.Dto", "src\Infra.CrossCutting.Dto\Infra.CrossCutting.Dto.csproj", "{BD1CE8A5-BF98-4A5A-82F7-BE7DF909509B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.CrossCutting.Dto", "src\Infra.CrossCutting.Dto\Infra.CrossCutting.Dto.csproj", "{BD1CE8A5-BF98-4A5A-82F7-BE7DF909509B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.CrossCutting.IoC", "src\Infra.CrossCutting.IoC\Infra.CrossCutting.IoC.csproj", "{AB2B8497-E4E0-497A-BFA0-189D47EC054C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.CrossCutting.IoC", "src\Infra.CrossCutting.IoC\Infra.CrossCutting.IoC.csproj", "{AB2B8497-E4E0-497A-BFA0-189D47EC054C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

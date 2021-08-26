@@ -3,6 +3,7 @@ using Domain.Interfaces.UoW;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Threading.Tasks;
 
 namespace Infra.Data.UoW
 {
@@ -18,15 +19,13 @@ namespace Infra.Data.UoW
             _context = context;
         }
 
-        public async void BeginTransaction()
-        {
-            _transaction = _context.Database.BeginTransactionAsync().Result;
-        }
-
         public bool Commit()
         {
             if (_context == null)
-                throw new ArgumentException("");
+            {
+                _notificador.Notificar("Não foi possível realizar a operação");
+                return false;
+            }
 
             try
             {
@@ -34,7 +33,7 @@ namespace Infra.Data.UoW
             }
             catch (Exception e)
             {
-                _notificador.Notificar(e.ToString());
+                _notificador.Notificar(e.InnerException.Message);
                 return false;
             }
         }
@@ -42,10 +41,6 @@ namespace Infra.Data.UoW
         public void Dispose()
         {
             _context?.Dispose();
-        }
-
-        public void Rollback()
-        {
         }
     }
 }
