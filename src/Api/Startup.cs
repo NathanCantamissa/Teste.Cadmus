@@ -1,4 +1,5 @@
 using Api.Configuration;
+using Infra.CrossCutting.IoC;
 using Infra.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace Api
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentityConfig(Configuration);
+            services.ResolveDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

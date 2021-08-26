@@ -41,7 +41,7 @@ namespace Infra.Data.UoW
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context?.Dispose();
         }
 
         public void Rollback()
