@@ -17,6 +17,8 @@ namespace Domain.Models
         //Relacionamentos do EF
         public List<Produto> Produtos { get; set; }
 
+        public Guid ProdutoId { get; set; }
+
         public Cliente Cliente { get; set; }
         public Guid ClienteId { get; set; }
 

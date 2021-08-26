@@ -39,24 +39,16 @@ namespace Infra.Data.Repositories
         public virtual async Task Adicionar(TEntity entity)
         {
             DbSet.Add(entity);
-            await SaveChanges();
         }
 
         public virtual async Task Atualizar(TEntity entity)
         {
             DbSet.Update(entity);
-            await SaveChanges();
         }
 
         public virtual async Task Remover(Guid id)
         {
             DbSet.Remove(new TEntity { Id = id });
-            await SaveChanges();
-        }
-
-        public async Task<int> SaveChanges()
-        {
-            return await Db.SaveChangesAsync();
         }
 
         public void Dispose()

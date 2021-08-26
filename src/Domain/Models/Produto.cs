@@ -8,9 +8,6 @@ namespace Domain.Models
         public decimal Valor { get; set; }
         public string Foto { get; set; }
 
-        public Pedido Pedido { get; set; }
-        public Guid PedidoId { get; set; }
-
         public Produto()
         {
         }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Data.Migrations
 {
     [DbContext(typeof(ContextoEntity))]
-    [Migration("20210825023050_Inicial")]
-    partial class Inicial
+    [Migration("20210826015946_Novo")]
+    partial class Novo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,18 +60,21 @@ namespace Infra.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<double>("Desconto")
-                        .HasColumnType("double");
+                        .HasColumnType("float");
 
                     b.Property<int>("Numero")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
 
@@ -83,7 +86,6 @@ namespace Infra.Data.Migrations
             modelBuilder.Entity("Domain.Models.Produto", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
@@ -94,15 +96,10 @@ namespace Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<Guid>("PedidoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(100,2)");
+                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PedidoId");
 
                     b.ToTable("Produtos");
                 });
@@ -120,13 +117,11 @@ namespace Infra.Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Produto", b =>
                 {
-                    b.HasOne("Domain.Models.Pedido", "Pedido")
+                    b.HasOne("Domain.Models.Pedido", null)
                         .WithMany("Produtos")
-                        .HasForeignKey("PedidoId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("Domain.Models.Cliente", b =>

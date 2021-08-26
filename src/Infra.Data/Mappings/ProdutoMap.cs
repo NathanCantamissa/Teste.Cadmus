@@ -13,7 +13,7 @@ namespace Infra.Data.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Descricao).HasColumnType("varchar(100)").IsRequired();
-            builder.Property(x => x.Valor).HasColumnType("decimal(100,2)").IsRequired();
+            builder.Property(x => x.Valor).HasColumnType("decimal").IsRequired();
             builder.Property(x => x.Foto).HasColumnType("varchar(100)").IsRequired();
         }
     }
