@@ -19,15 +19,13 @@ namespace Infra.Data.UoW
             _context = context;
         }
 
-        public async void BeginTransaction()
-        {
-            _transaction = _context.Database.BeginTransactionAsync().Result;
-        }
-
         public bool Commit()
         {
             if (_context == null)
-                throw new ArgumentException("xD");
+            {
+                _notificador.Notificar("Não foi possível realizar a operação");
+                return false;
+            }
 
             try
             {
@@ -43,10 +41,6 @@ namespace Infra.Data.UoW
         public void Dispose()
         {
             _context?.Dispose();
-        }
-
-        public void Rollback()
-        {
         }
     }
 }
