@@ -9,6 +9,6 @@ namespace Domain.Interfaces.Service
 {
     public interface IClienteService
     {
-        void Cadastrar(CadastroClienteDto dados);
+        Task Cadastrar(CadastroClienteDto dados);
     }
 }

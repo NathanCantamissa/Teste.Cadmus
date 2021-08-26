@@ -3,6 +3,7 @@ using Domain.Interfaces.UoW;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Threading.Tasks;
 
 namespace Infra.Data.UoW
 {
@@ -26,7 +27,7 @@ namespace Infra.Data.UoW
         public bool Commit()
         {
             if (_context == null)
-                throw new ArgumentException("");
+                throw new ArgumentException("xD");
 
             try
             {
@@ -34,7 +35,7 @@ namespace Infra.Data.UoW
             }
             catch (Exception e)
             {
-                _notificador.Notificar(e.ToString());
+                _notificador.Notificar(e.InnerException.Message);
                 return false;
             }
         }

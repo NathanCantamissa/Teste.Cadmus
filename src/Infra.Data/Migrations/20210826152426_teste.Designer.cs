@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Data.Migrations
 {
     [DbContext(typeof(ContextoEntity))]
-    [Migration("20210826015946_Novo")]
-    partial class Novo
+    [Migration("20210826152426_teste")]
+    partial class teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace Infra.Data.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime");
 
-                    b.Property<double>("Desconto")
+                    b.Property<double?>("Desconto")
                         .HasColumnType("float");
 
                     b.Property<int>("Numero")
@@ -86,6 +86,7 @@ namespace Infra.Data.Migrations
             modelBuilder.Entity("Domain.Models.Produto", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
@@ -104,6 +105,21 @@ namespace Infra.Data.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("PedidoProduto", b =>
+                {
+                    b.Property<Guid>("PedidosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProdutosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PedidosId", "ProdutosId");
+
+                    b.HasIndex("ProdutosId");
+
+                    b.ToTable("PedidoProduto");
+                });
+
             modelBuilder.Entity("Domain.Models.Pedido", b =>
                 {
                     b.HasOne("Domain.Models.Cliente", "Cliente")
@@ -115,11 +131,17 @@ namespace Infra.Data.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("Domain.Models.Produto", b =>
+            modelBuilder.Entity("PedidoProduto", b =>
                 {
                     b.HasOne("Domain.Models.Pedido", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("Id")
+                        .WithMany()
+                        .HasForeignKey("PedidosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Produto", null)
+                        .WithMany()
+                        .HasForeignKey("ProdutosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -127,11 +149,6 @@ namespace Infra.Data.Migrations
             modelBuilder.Entity("Domain.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("Domain.Models.Pedido", b =>
-                {
-                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

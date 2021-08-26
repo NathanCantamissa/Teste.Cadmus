@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Data.Migrations
 {
-    public partial class Novo : Migration
+    public partial class teste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,20 @@ namespace Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Produtos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal", nullable: false),
+                    Foto = table.Column<string>(type: "varchar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pedidos",
                 columns: table => new
                 {
@@ -30,7 +44,7 @@ namespace Infra.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal", nullable: false),
-                    Desconto = table.Column<double>(type: "float", nullable: false),
+                    Desconto = table.Column<double>(type: "float", nullable: true),
                     ValorTotal = table.Column<decimal>(type: "decimal", nullable: false),
                     ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -47,21 +61,25 @@ namespace Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produtos",
+                name: "PedidoProduto",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal", nullable: false),
-                    Foto = table.Column<string>(type: "varchar(100)", nullable: false)
+                    PedidosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_PedidoProduto", x => new { x.PedidosId, x.ProdutosId });
                     table.ForeignKey(
-                        name: "FK_Produtos_Pedidos_Id",
-                        column: x => x.Id,
+                        name: "FK_PedidoProduto_Pedidos_PedidosId",
+                        column: x => x.PedidosId,
                         principalTable: "Pedidos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PedidoProduto_Produtos_ProdutosId",
+                        column: x => x.ProdutosId,
+                        principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -73,6 +91,11 @@ namespace Infra.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_PedidoProduto_ProdutosId",
+                table: "PedidoProduto",
+                column: "ProdutosId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_ClienteId",
                 table: "Pedidos",
                 column: "ClienteId");
@@ -81,10 +104,13 @@ namespace Infra.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Produtos");
+                name: "PedidoProduto");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
+
+            migrationBuilder.DropTable(
+                name: "Produtos");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

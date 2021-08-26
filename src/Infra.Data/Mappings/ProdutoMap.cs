@@ -15,6 +15,7 @@ namespace Infra.Data.Mappings
             builder.Property(x => x.Descricao).HasColumnType("varchar(100)").IsRequired();
             builder.Property(x => x.Valor).HasColumnType("decimal").IsRequired();
             builder.Property(x => x.Foto).HasColumnType("varchar(100)").IsRequired();
+            builder.HasMany(x => x.Pedidos).WithMany(x => x.Produtos);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.Notification;
 using Domain.Interfaces.Service;
+using Infra.CrossCutting.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,8 +23,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post([FromForm] CadastroProdutoDto dados, IFormFile foto)
         {
+            await _produtoService.Cadastrar(dados, foto);
             return CustomResponse();
         }
     }

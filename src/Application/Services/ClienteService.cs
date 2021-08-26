@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Validations;
+using AutoMapper;
 using Domain.Interfaces.Notification;
 using Domain.Interfaces.Repository;
 using Domain.Interfaces.Service;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class ClienteService : IClienteService
+    public class ClienteService : BaseService, IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
@@ -23,7 +24,7 @@ namespace Application.Services
         public ClienteService(IClienteRepository clienteRepository,
             IMapper mapper,
             INotificador notificador,
-            IUnitOfWork uow)
+            IUnitOfWork uow) : base(notificador)
         {
             _clienteRepository = clienteRepository;
             _mapper = mapper;
@@ -31,9 +32,13 @@ namespace Application.Services
             _uow = uow;
         }
 
-        public async void Cadastrar(CadastroClienteDto dados)
+        public async Task Cadastrar(CadastroClienteDto dados)
         {
+            if (!ExecutarValidacao(new ClienteValidation(), _mapper.Map<Cliente>(dados)))
+                return;
+
             await _clienteRepository.Adicionar(_mapper.Map<Cliente>(dados));
+
             _uow.Commit();
         }
     }

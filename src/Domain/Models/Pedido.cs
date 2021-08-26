@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Domain.Models
 {
@@ -11,7 +12,7 @@ namespace Domain.Models
 
         public DateTime Data { get; set; }
         public decimal Valor { get; set; }
-        public double Desconto { get; set; }
+        public double? Desconto { get; set; }
         public decimal ValorTotal { get; set; }
 
         //Relacionamentos do EF
@@ -21,6 +22,13 @@ namespace Domain.Models
 
         public Cliente Cliente { get; set; }
         public Guid ClienteId { get; set; }
+
+        public void Cadastrar(Pedido pedido)
+        {
+            Data = DateTime.Now;
+            Valor = pedido.Produtos.Sum(x => x.Valor);
+            ValorTotal = Desconto != null ? Valor * Convert.ToDecimal(Desconto) : Valor;
+        }
 
         public Pedido()
         {
