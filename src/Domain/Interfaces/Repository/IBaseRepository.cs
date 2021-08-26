@@ -19,7 +19,5 @@ namespace Domain.Interfaces.Repository
         Task Remover(Guid id);
 
         Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
-
-        Task<int> SaveChanges();
     }
 }

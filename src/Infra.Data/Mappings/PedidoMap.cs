@@ -19,7 +19,7 @@ namespace Infra.Data.Mappings
             builder.Property(x => x.ValorTotal).HasColumnType("decimal").IsRequired();
 
             builder.HasOne(x => x.Cliente).WithMany(x => x.Pedidos).HasForeignKey(x => x.ClienteId);
-            builder.HasMany(x => x.Produtos).WithOne(x => x.Pedido).HasForeignKey(x => x.PedidoId);
+            builder.HasMany(x => x.Produtos).WithOne().HasForeignKey(x => x.Id);
         }
     }
 }

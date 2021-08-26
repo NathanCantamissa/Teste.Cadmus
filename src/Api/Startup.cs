@@ -22,14 +22,18 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddDbContext<ContextoEntity>(options
-                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentityConfig(Configuration);
+            services.AddApiConfig();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+            services.AddAutoMapperConfig();
+
+            services.AddDbContext<ContextoEntity>(options
+                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentityConfig(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

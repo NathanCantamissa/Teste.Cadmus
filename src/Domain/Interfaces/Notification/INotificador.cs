@@ -11,8 +11,8 @@ namespace Domain.Interfaces.Notification
     {
         bool TemNotificacao();
 
-        List<Notificacao> ObterNotificacoes();
+        List<string> ObterNotificacoes();
 
-        void Handle(Notificacao notificacao);
+        void Notificar(string notificacao);
     }
 }

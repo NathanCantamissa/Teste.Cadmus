@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Novo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,7 @@ namespace Infra.Data.Migrations
                     Valor = table.Column<decimal>(type: "decimal", nullable: false),
                     Desconto = table.Column<double>(type: "float", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -52,15 +53,14 @@ namespace Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal", nullable: false),
-                    Foto = table.Column<string>(type: "varchar(100)", nullable: false),
-                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Foto = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produtos_Pedidos_PedidoId",
-                        column: x => x.PedidoId,
+                        name: "FK_Produtos_Pedidos_Id",
+                        column: x => x.Id,
                         principalTable: "Pedidos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -76,11 +76,6 @@ namespace Infra.Data.Migrations
                 name: "IX_Pedidos_ClienteId",
                 table: "Pedidos",
                 column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produtos_PedidoId",
-                table: "Produtos",
-                column: "PedidoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

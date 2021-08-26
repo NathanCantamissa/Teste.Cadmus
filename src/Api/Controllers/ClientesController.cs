@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.Notification;
 using Domain.Interfaces.Service;
+using Infra.CrossCutting.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,8 +22,10 @@ namespace Api.Controllers
             _clienteService = clienteService;
         }
 
-        public async Task<IActionResult> Post()
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CadastroClienteDto dados)
         {
+            _clienteService.Cadastrar(dados);
             return CustomResponse();
         }
     }

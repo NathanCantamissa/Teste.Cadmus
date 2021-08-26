@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infra.CrossCutting.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Domain.Interfaces.Service
 {
     public interface IClienteService
     {
+        void Cadastrar(CadastroClienteDto dados);
     }
 }
