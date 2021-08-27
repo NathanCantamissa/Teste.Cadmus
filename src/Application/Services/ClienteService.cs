@@ -41,5 +41,10 @@ namespace Application.Services
 
             _uow.Commit();
         }
+
+        public async Task<ClienteDto> Obter(Guid id)
+        {
+            return _mapper.Map<ClienteDto>(await _clienteRepository.ObterPorId(id));
+        }
     }
 }

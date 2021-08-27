@@ -12,6 +12,10 @@ namespace Application.Validations
     {
         public PedidoValidation()
         {
+            RuleFor(c => c.Valor)
+                  .GreaterThan(0).WithMessage("O {PropertyName} precisa ser maior que {ComparisonValue}");
+            RuleFor(c => c.ValorTotal)
+                 .GreaterThan(0).WithMessage("O {PropertyName} precisa ser maior que {ComparisonValue}");
         }
     }
 }

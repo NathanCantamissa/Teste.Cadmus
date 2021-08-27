@@ -10,5 +10,7 @@ namespace Domain.Interfaces.Service
     public interface IClienteService
     {
         Task Cadastrar(CadastroClienteDto dados);
+
+        Task<ClienteDto> Obter(Guid id);
     }
 }

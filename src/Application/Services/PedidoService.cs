@@ -20,6 +20,7 @@ namespace Application.Services
         private readonly IMapper _mapper;
         private readonly INotificador _notificador;
         private readonly IUnitOfWork _uow;
+        private readonly IProdutoService _produtoService;
 
         public PedidoService(IPedidoRepository pedidoRepository,
             IMapper mapper,
@@ -34,10 +35,16 @@ namespace Application.Services
 
         public async Task Cadastrar(CadastroPedidoDto dados)
         {
-            if (!ExecutarValidacao(new PedidoValidation(), _mapper.Map<Pedido>(dados)))
+            Pedido novoPedido = _mapper.Map<Pedido>(dados);
+
+            novoPedido.Produtos = _mapper.Map<List<Produto>>(_produtoService.BuscarProdutosPorId(dados.ProdutoId));
+            novoPedido.Cliente = new Cliente();
+            novoPedido.PopularPropriedades();
+
+            if (!ExecutarValidacao(new PedidoValidation(), novoPedido))
                 return;
 
-            await _pedidoRepository.Adicionar(_mapper.Map<Pedido>(dados));
+            await _pedidoRepository.Adicionar(novoPedido);
 
             _uow.Commit();
         }

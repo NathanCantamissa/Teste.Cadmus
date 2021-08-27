@@ -28,5 +28,11 @@ namespace Api.Controllers
             await _produtoService.Cadastrar(dados, foto);
             return CustomResponse();
         }
+
+        [HttpGet, Route("id:guid")]
+        public async Task<IActionResult> Get([FromQuery]List<Guid> ids)
+        {
+            return CustomResponse(await _produtoService.BuscarProdutosPorId(ids));
+        }
     }
 }

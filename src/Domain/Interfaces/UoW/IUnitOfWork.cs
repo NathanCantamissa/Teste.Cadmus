@@ -8,6 +8,6 @@ namespace Domain.Interfaces.UoW
 {
     public interface IUnitOfWork : IDisposable
     {
-        bool Commit();
+        void Commit();
     }
 }

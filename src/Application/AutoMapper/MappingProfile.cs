@@ -15,7 +15,9 @@ namespace Application.AutoMapper
         public MappingProfile()
         {
             CreateMap<Cliente, CadastroClienteDto>().ReverseMap();
+            CreateMap<Cliente, ClienteDto>().ReverseMap();
             CreateMap<Produto, CadastroProdutoDto>().ReverseMap();
+            CreateMap<Produto, ProdutoDto>().ReverseMap();
             CreateMap<Pedido, CadastroPedidoDto>().ReverseMap();
         }
     }
