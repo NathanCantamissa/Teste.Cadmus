@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.Repository;
 using Domain.Models;
 using Infra.Data.Context;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,18 @@ namespace Infra.Data.Repositories
         public void Dispose()
         {
             Db?.Dispose();
+        }
+
+        public List<SqlParameter> ListaDeParametros<T>(List<T> lista, out string[] parameters)
+        {
+            parameters = new string[lista.Count];
+            var sqlParameters = new List<SqlParameter>();
+            for (var i = 0; i < lista.Count; i++)
+            {
+                parameters[i] = string.Format("@p{0}", i);
+                sqlParameters.Add(new SqlParameter(parameters[i], lista[i]));
+            }
+            return sqlParameters;
         }
     }
 }

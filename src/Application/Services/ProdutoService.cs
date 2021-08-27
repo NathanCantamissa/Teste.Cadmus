@@ -34,11 +34,19 @@ namespace Application.Services
             _uow = uow;
         }
 
+        public async Task<List<ProdutoDto>> BuscarProdutosPorId(List<Guid> ids)
+        {
+            return _mapper.Map<List<ProdutoDto>>(await _produtoRepository.BuscarProdutosPorIds(ids));
+        }
+
         public async Task Cadastrar(CadastroProdutoDto dados, IFormFile foto)
         {
             Produto novoProduto = _mapper.Map<Produto>(dados);
-            if (foto.Length > 0)
-                UploadArquivo(novoProduto, foto);
+            if (foto != null)
+            {
+                if (foto.Length > 0)
+                    UploadArquivo(novoProduto, foto);
+            }
 
             if (!ExecutarValidacao(new ProdutoValidation(), novoProduto))
                 return;

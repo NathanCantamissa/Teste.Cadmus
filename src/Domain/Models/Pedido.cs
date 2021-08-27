@@ -23,10 +23,10 @@ namespace Domain.Models
         public Cliente Cliente { get; set; }
         public Guid ClienteId { get; set; }
 
-        public void Cadastrar(Pedido pedido)
+        public void PopularPropriedades()
         {
             Data = DateTime.Now;
-            Valor = pedido.Produtos.Sum(x => x.Valor);
+            Valor = Produtos.Sum(x => x.Valor);
             ValorTotal = Desconto != null ? Valor * Convert.ToDecimal(Desconto) : Valor;
         }
 

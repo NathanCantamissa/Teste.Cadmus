@@ -19,22 +19,21 @@ namespace Infra.Data.UoW
             _context = context;
         }
 
-        public bool Commit()
+        public void Commit()
         {
             if (_context == null)
-            {
                 _notificador.Notificar("Não foi possível realizar a operação");
-                return false;
-            }
 
-            try
+            if (!_notificador.TemNotificacao())
             {
-                return _context.SaveChanges() > 0;
-            }
-            catch (Exception e)
-            {
-                _notificador.Notificar(e.InnerException.Message);
-                return false;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    _notificador.Notificar(e.InnerException.Message);
+                }
             }
         }
 
